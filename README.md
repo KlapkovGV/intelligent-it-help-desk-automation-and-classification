@@ -7,7 +7,7 @@ Before getting start, let me outline the input data and requirements here.
 
 Input Data: Connection problem, Hardware request, Access error, Access request, I'am getting an error message, Mail group addition, Report request, System error, Server unreachable, Application not working, VPN connection problem, VPN access request, Software installation, New user request, Permission request. 
 
-An Excel sheet containing 3,000 email questions. These are example user messages from an IT help desk, providing a realistic dataset for testing the classification system.
+A dataset Console-AI/IT-helpdesk-synthetic-tickets from Hugging Face will be used. The dataset contains 500 rows and 7 columns. It appears to be a good fit for the project.
 
 The system is designed with 3 key stages:
 
@@ -25,4 +25,4 @@ For this stage, I need to create and explain a logical workflow deagram. The dia
 
 Stage 3: LLM Prompt Engineering
 
-The focus is on prompt enfineering. I need to write an effective instruction for an AI model so that the model generates a response that meets the requirements. The must accurately determine which category the information that passed through regex as ambiguous belongs to. The categories that must be included in the prompt are: Connection, Hardware, Access, Software, User Management, Reporting.
+The focus is on prompt enfineering. I need to write an effective instruction for an AI model so that the model generates a response that meets the requirements. The must accurately determine which category the information that passed through regex as ambiguous belongs to. The categories that must be included in the prompt are: Network, Software, Account, Training, Security, Licensing, Communication, RemoteWork, HardWare, Infrastructure, Performance. 
