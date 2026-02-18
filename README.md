@@ -24,3 +24,5 @@ For this stage, I need to create and explain a logical workflow deagram. The dia
 - Final category assignment — after both regex and AI processing, each message is labeled with its final category
 
 Stage 3: LLM Prompt Engineering
+
+The focus is on prompt enfineering. I need to write an effective instruction for an AI model so that the model generates a response that meets the requirements. The must accurately determine which category the information that passed through regex as ambiguous belongs to. The categories that must be included in the prompt are: Connection, Hardware, Access, Software, User Management, Reporting.
