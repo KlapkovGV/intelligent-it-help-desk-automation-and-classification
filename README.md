@@ -65,7 +65,7 @@ I started the workflow design by deciding to use the Mermaid function for visual
 
 Incoming IT help desk tickets enter the system. Each ticket is processed by a Python regex script that checks for keywords using error_pattern and request_pattern. If no keywords match, the ticket is marked as "Ambiguous". These ambiguous tickets are then sent to an AI model for deeper analysis. The AI model follows a carefully engineered prompt and classifies each ambiguous ticket into one of eleven categories. In the final step, tickets from regex plus tickets from the LLM are combined and stored with their final classification.
 
-Below, I present a diagram for visual understanding:
+Below, the diagram for visual understanding:
 
 ```mermaid
 graph TD
