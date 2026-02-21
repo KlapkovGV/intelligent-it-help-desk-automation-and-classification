@@ -108,3 +108,56 @@ graph TD
 ```
 
 ## LLM Prompt Engineering
+
+I started this stage by studying the official Prompt design strategies documentation from the Gemini API. I had never done prompt engineering before, so here I will describe my first steps and the application of basic concepts.
+
+Reference: https://ai.google.dev/gemini-api/docs/prompting-strategies
+
+According to the documentation, Prompt Design is the process of creating prompts or natural language requests that guide a language model to generate accurate and relevant responses.
+
+The first concept I applied is **Clear and specific instructions**. In the documentation, this is described as the most effective way to customize model behavior.
+
+In my designed prompt, this concept is implemented through the following elements:
+- Role Prompting: I assigned the model a role — IT help desk ticket classifier. This sets the context and professional tone for the response;
+- Closed Vocabulary: The prompt includes a clear list of 11 categories. The model should not invent its own category names but must choose from the provided options;
+- Constraints: The sentence "Your job is to categorize the following ticket into ONE of these categories" clearly instructs the model that classification must be unambiguous, without listing multiple options;
+- Strict Response Format: The instruction "Return ONLY the category name without any additional text" is a classic example of format constraints, eliminating unnecessary explanations from the model.
+
+### My prompt version
+```python
+prompt = f"""
+You are an IT help desk ticket classifier. Your job is to categorize the following ticket into ONE of these categories:
+- Network
+- Software
+- Account
+- Training
+- Security
+- Licensing
+- Communication
+- RemoteWork
+- Hardware
+- Infrastructure
+- Performance
+
+Ticket description: {description}
+
+Return ONLY the category name without any additional text.
+"""
+```
+
+The next important concept in the documentation is the distinction between Zero-shot and Few-shot prompts:
+- **Zero-shot** is when the model receives the task without examples;
+- **Few-shot** is when the prompt includes several examples of what a correct response looks like. The model identifies patterns from these examples and applies them to new data.
+
+At this stage, I used a Zero-shot prompt. This is necessary to obtain baseline data and compare the "raw" model's performance against the original dataset from Hugging Face.
+
+## Result Analysis
+
+After running the LLM, I wrote code to merge the original Hugging Face dataset with the table generated after the classifier worked. 
+
+According to the analysis:
+
+- Total messages processed by LLM are 327 out of 500 (from the Hugging Face dataset) + 6 of my custom examples;
+- Correctly classified: 149.
+
+These results clearly show that the current zero-shot prompt needs improvement. The next logical step is to customize the prompt by adding few-shot examples.
