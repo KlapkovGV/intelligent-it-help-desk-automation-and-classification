@@ -127,17 +127,17 @@ In my designed prompt, this concept is implemented through the following element
 ```python
 prompt = f"""
 You are an IT help desk ticket classifier. Your job is to categorize the following ticket into ONE of these categories:
-- Network
-- Software
-- Account
-- Training
-- Security
-- Licensing
-- Communication
-- RemoteWork
-- Hardware
-- Infrastructure
-- Performance
+- Network.
+- Software.
+- Account.
+- Training.
+- Security.
+- Licensing.
+- Communication.
+- RemoteWork.
+- Hardware.
+- Infrastructure.
+- Performance.
 
 Ticket description: {description}
 
