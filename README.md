@@ -25,7 +25,7 @@ For this stage, a logical workflow deagram must be created and explained. The di
 
 Stage 3: LLM Prompt Engineering
 
-The focus is on prompt enfineering. An effective instructin for the AI model must be written to ensure the generated response meets all requirements. Specifically, the model must accurately determine the correct category for emails labeled as ambiguous by the Regex filter. The categories that must be included in the prompt are: Network, Software, Account, Training, Security, Licensing, Communication, RemoteWork, HardWare, Infrastructure, Performance. 
+The focus is on prompt engineering. An effective instruction for the AI model must be written to ensure the generated response meets all requirements. Specifically, the model must accurately determine the correct category for emails labeled as ambiguous by the Regex filter. The categories that must be included in the prompt are: Network, Software, Account, Training, Security, Licensing, Communication, RemoteWork, HardWare, Infrastructure, Performance. 
 
 
 ## Data Preprocessing
@@ -161,3 +161,42 @@ According to the analysis:
 - Correctly classified: 149.
 
 These results clearly show that the current zero-shot prompt needs improvement. The next logical step is to customize the prompt by adding few-shot examples.
+
+## From Zero-Shot to Advanced Instructions
+
+After analyzing the initial results, it became clear that the model struggled. For instance, polite greetings were misclassified as "Communication", and requests for help with software navigation were mistakenly tagged as "Software" technical bugs.
+
+To address this, I first attempted a Few-Shot approach. I selected a small sample of 10 messages and provided the model with 5 examples of correct classifications. However, the results remained unsatisfactory, with a 50% error rate on this sample. The model continued to prioritize superficial keywords over the actual intent of the user. 
+
+Instead of simply providing more examples, I decided to deepen the Clear and Specific Instructions concept. I shifted from a simple list of categories to a structured "Classification Logic" combined with "Critical Rules".
+
+This approach acts as a decision-making framework for the LLM, explicitly telling it what to ignore and what to prioritize.
+
+### Improved Prompt on a group of 10 messages
+
+```python
+prompt = f"""
+You are an IT help desk ticket classifier. Your job is to categorize the following ticket into ONE of these categories:
+- Network, Software, Account, Training, Security, Licensing, Communication, RemoteWork, Hardware, Infrastructure, Performance.
+
+Classification Logic (CRITICAL):
+- Training: User doesn't know HOW to use something. Requests for "guidance", "resources", "how-to", "navigation help", or "manuals".
+- Software: Technical bugs, "crashes", "conflicts", "log analysis for errors", "installation", or "configuration" of apps.
+- Security: Data breaches, "malware", "phishing", "unauthorized access", "firewall rules", or "antivirus alerts".
+
+CRITICAL RULES (FOLLOW THESE FIRST):
+1. If the user mentions "guidance" or "resources" regarding a system (even if it's Software or Network), you MUST classify it as 'Training'.
+2. If the user mentions "crashes", "software conflict", or "analyzing logs" to fix a bug, you MUST classify it as 'Software'. 
+3. Use 'Security' ONLY for actual threats or access violations. A software crash is NEVER a security issue.
+4. Do NOT classify as 'Communication' just because it's an email/polite message. Only use it for communication software issues.
+5. Ignore greetings ("Hello"), signatures ("Thanks, Alex"), and emojis. Focus only on the core request.
+
+Ticket description: {description}
+
+Return ONLY the category name without any additional text.
+"""
+```
+
+I tested this prompt on a control group of 10 messages. The result was 100% accuracy for this sample.
+
+Note: To fully scale this solution, the "Classification Logic" section needs to be expanded for the remaining categories (Network, Hardware, Licensing, etc.), providing the model with a complete heuristic for every possible scenario.
