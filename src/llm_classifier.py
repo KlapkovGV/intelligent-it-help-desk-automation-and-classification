@@ -39,11 +39,19 @@ def get_llm_classification(description, api_key):
     try:
         response = client.models.generate_content(model=MODEL_NAME, contents=prompt)
         result = response.text.strip().replace("*", "").replace("\"", "").replace("'", "").strip()
-        
-        # Твоя логика проверки результата
-        for k in CATEGORIES:
-            if k.lower() in result.lower():
-                return k
-        return "Ambiguous"
-    except Exception as e:
-        return f"Error: {e}"
+    if result in categories:
+      return result
+
+    for k in categories:
+      if k.lower() == result.lower():
+        return k
+
+    for k in categories:
+      if k.lower() in result.lower():
+        return k
+
+    return "Ambiguous"
+
+  except Exception as e:
+    print(f'    LLM Error: {e}')
+    return 'Error'
