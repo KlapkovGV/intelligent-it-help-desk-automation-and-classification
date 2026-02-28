@@ -37,21 +37,28 @@ def get_llm_classification(description, api_key):
   """
     
     try:
+        # Request to Gemini API
         response = client.models.generate_content(model=MODEL_NAME, contents=prompt)
+        
+        # Cleaning the response
         result = response.text.strip().replace("*", "").replace("\"", "").replace("'", "").strip()
-    if result in categories:
-      return result
 
-    for k in categories:
-      if k.lower() == result.lower():
-        return k
+        # Check for exact match
+        if result in CATEGORIES:
+            return result
 
-    for k in categories:
-      if k.lower() in result.lower():
-        return k
+        # Check for case-insensitive match
+        for k in CATEGORIES:
+            if k.lower() == result.lower():
+                return k
 
-    return "Ambiguous"
+        # Check if any category name is mentioned in the response
+        for k in CATEGORIES:
+            if k.lower() in result.lower():
+                return k
 
-  except Exception as e:
-    print(f'    LLM Error: {e}')
-    return 'Error'
+        return "Ambiguous"
+
+    except Exception as e:
+        print(f'LLM Error: {e}')
+        return 'Error'
