@@ -14,7 +14,7 @@ API_KEY = os.getenv("GEMINI_API_KEY")
 def main():
     # Load the full dataset from Hugging Face
     print("Loading dataset...")
-    df = pd.read_csv("hf://datasets/Console-AI/IT-helpdesk-synthetic-tickets/tickets.csv")
+    df = pd.read_csv("data/dataset.csv")
 
     # Keep only required columns
     df = df[['id', 'subject', 'description']]
