@@ -7,7 +7,7 @@ Before getting start, let me outline the input data and requirements here.
 
 Input Data: Connection problem, Hardware request, Access error, Access request, I'am getting an error message, Mail group addition, Report request, System error, Server unreachable, Application not working, VPN connection problem, VPN access request, Software installation, New user request, Permission request. 
 
-The dataset Console-AI/IT-helpdesk-synthetic-tickets from Hugging Face will be used. It contains 500 rows and 7 columns. Appeared to be a good fit for the project.
+The dataset Console-AI/IT-helpdesk-synthetic-tickets (https://huggingface.co/datasets/Console-AI/IT-helpdesk-synthetic-tickets) from Hugging Face was used. It contains 500 rows and 7 columns. Appeared to be a good fit for the project.
 
 The system is designed with 3 key stages:
 
