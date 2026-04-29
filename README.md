@@ -107,7 +107,7 @@ These results clearly show that the current zero-shot prompt needs improvement. 
 
 ## From Zero-Shot to Advanced Instructions
 
-After analyzing the initial results, it became clear that the model struggled. For instance, a user reporting that the HR portal won't load and the screen freezes — was classified as "Connectivity" instead of "Software". This is a reasonable mistake: the message mentions login issues and slowness, which superficially resemble network problems.  
+After analyzing the initial results, it became clear that the model struggled. For instance, a user reporting that the HR portal won't load and the screen freezes, the message was classified as "Connectivity" instead of "Software". This is a reasonable mistake: the message mentions login issues and slowness, which superficially resemble network problems.  
 
 To improve LLM accuracy, the zero-shot prompt was replaced with a few-shot prompt combined with explicit Classification Logic:
 * Few-shot examples
