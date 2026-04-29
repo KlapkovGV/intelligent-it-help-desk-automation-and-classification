@@ -26,7 +26,7 @@ def classify_message(text):
 
 ## Hybrid Workflow design
 
-I started the workflow design by deciding to use the Mermaid function for visualization purposes. I will begin by explaining the terms outlined in Stage 2: Data input, Regex processing, Routing to AI model, and Final category assignment.
+For the workflow visualization, I chose Mermaid due to its simplicity and native GitHub rendering support. The diagram covers four key components: data input, regex processing, routing to the AI model, and final category assignment.
 
 Incoming IT help desk tickets enter the system. Each ticket is processed by a Python regex script that checks for keywords using error_pattern and request_pattern. If no keywords match, the ticket is marked as "Ambiguous". These ambiguous tickets are then sent to an AI model for deeper analysis. The AI model follows a carefully engineered prompt and classifies each ambiguous ticket into one of eleven categories. In the final step, tickets from regex plus tickets from the LLM are combined and stored with their final classification.
 
