@@ -87,7 +87,7 @@ You are an IT Support specialist. Your task is to classify the incoming message 
     - Software.
     - User Management.
 
-Ticket description: {description}
+Ticket body: {body}
 
 Return ONLY the category name without any additional text.
 """
