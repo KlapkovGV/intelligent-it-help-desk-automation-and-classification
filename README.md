@@ -70,7 +70,7 @@ According to the documentation, prompt design is the process of creating prompts
 The first concept I applied is **Clear and specific instructions**. In the documentation, this is described as the most effective way to customize model behavior.
 
 In my designed prompt, this concept is implemented through the following elements:
-- Role Prompting: I assigned the model a role — "You are an IT Help Desk specialist". This sets the context and professional tone for the response;
+- Role Prompting: I assigned the model a role — "You are an IT Support specialist". This sets the context and professional tone for the response;
 - Closed Vocabulary: The prompt includes a clear list of 6 categories. The model should not invent its own category names but must choose from the provided options;
 - Constraints: The sentence "Your job is to categorize the following ticket into ONE of these categories" clearly instructs the model that classification must be unambiguous, without listing multiple options;
 - Strict Response Format: The instruction "Return ONLY the category name without any additional text" is a classic example of format constraints, eliminating unnecessary explanations from the model.
